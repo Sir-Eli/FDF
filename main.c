@@ -6,7 +6,7 @@
 /*   By: esirnio <esirnio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:10:30 by esirnio           #+#    #+#             */
-/*   Updated: 2022/02/14 15:14:38 by esirnio          ###   ########.fr       */
+/*   Updated: 2022/02/18 12:51:19 by esirnio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,9 @@
 
 int	main(int argc, char **argv)
 {
-	int fd;
-	
+
 	if (argc == 2)
-	{
-		fd = open(argv[1], O_RDONLY);
-		create_map(fd);
-		close(fd);
-	}
+		create_map(argv[1]);
 	else
 	{
 		ft_putstr("error");
