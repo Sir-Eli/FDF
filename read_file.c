@@ -6,7 +6,7 @@
 /*   By: esirnio <esirnio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 16:34:55 by esirnio           #+#    #+#             */
-/*   Updated: 2022/03/14 17:22:07 by esirnio          ###   ########.fr       */
+/*   Updated: 2022/03/17 14:27:30 by esirnio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ void	map_size(char *file, int *c, int *r)
 			}
 		}
 		(*r)++;
+		printf("%p", line);
 		free(line);
 	}
 	close(fd);
@@ -57,6 +58,7 @@ void	fill_array(char *file, int *arr)
 	while (get_next_line(fd, &line))
 	{
 		split = ft_strsplit(line, ' ');
+		printf("%p", line);
 		free(line);
 		while (split[j])
 		{
@@ -66,6 +68,7 @@ void	fill_array(char *file, int *arr)
 		}
 		j = 0;
 	}
+	printf("%p", split);
 	ft_free_array(split);
 	close(fd);
 }
