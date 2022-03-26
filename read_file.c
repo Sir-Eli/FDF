@@ -38,7 +38,6 @@ void	map_size(char *file, int *c, int *r)
 			}
 		}
 		(*r)++;
-		printf("%p", line);
 		free(line);
 	}
 	close(fd);
@@ -58,7 +57,6 @@ void	fill_array(char *file, int *arr)
 	while (get_next_line(fd, &line))
 	{
 		split = ft_strsplit(line, ' ');
-		printf("%p", line);
 		free(line);
 		while (split[j])
 		{
@@ -68,7 +66,6 @@ void	fill_array(char *file, int *arr)
 		}
 		j = 0;
 	}
-	printf("%p", split);
 	ft_free_array(split);
 	close(fd);
 }

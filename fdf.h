@@ -19,6 +19,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include "gnl/get_next_line.h"
+#include "libft/libft.h"
 #include "mlx.h"
 #include <math.h>
 
@@ -30,13 +31,11 @@ typedef struct s_fdf
 	int		*arr;
 	void	*mlx;
 	void	*win;
-	int		height;
-	int		width;
-	int		x;
-	int		y;
+	int		color;
+	int		height_multiplier;
 	int		win_height;
 	int		win_width;
-	int		color;
+	float	size;
 }		t_fdf;
 
 typedef struct s_point

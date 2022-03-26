@@ -11,7 +11,7 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-
+/*print_map(data.arr, data.r, data.c);
 void	print_map(int *arr, int r, int c)
 {
 	int keep_track_cols = 0;
@@ -32,12 +32,12 @@ void	print_map(int *arr, int r, int c)
 		}
 		i++;
 	}
-}
+}*/
 
 int	key(int button, t_fdf *data)
 {
 	(void)data;
-	if (button == 53)
+	if (button == 53 || button == 113)
 		exit (1);
 	return (1);
 }
@@ -49,6 +49,7 @@ void	set_points(t_fdf *data, t_point *points)
 	int	row;
 	int	column;
 
+	data->size = 20;
 	i = 0;
 	row = 0;
 	column = 0;
@@ -56,8 +57,8 @@ void	set_points(t_fdf *data, t_point *points)
 	{
 		while(column < data->c)
 		{
-			points[i].x = column;
-			points[i].y = row;
+			points[i].x = column * data->size;
+			points[i].y = row * data->size;
 			points[i].z = data->arr[i];
 			i++;
 			column++;
@@ -83,11 +84,10 @@ int	main(int argc, char **argv)
 	fill_array(argv[1], data.arr);
 	data.amount_points = data.c * data.r;
 	set_points(&data, p);
-	print_map(data.arr, data.r, data.c);
 	draw_map(&data, p);
 	
 	mlx_key_hook(data.win, &key, &data);
 	mlx_loop(data.mlx);
-	printf("%p", data.arr);
+
 	free(data.arr);
 }
