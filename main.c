@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-/*print_map(data.arr, data.r, data.c);
 void	print_map(int *arr, int r, int c)
 {
 	int keep_track_cols = 0;
@@ -32,62 +31,67 @@ void	print_map(int *arr, int r, int c)
 		}
 		i++;
 	}
-}*/
-
-int	key(int button, t_fdf *data)
-{
-	(void)data;
-	if (button == 53 || button == 113)
-		exit (1);
-	return (1);
 }
 
-//ft_putnbr(button); find value for key inside key function
-void	set_points(t_fdf *data, t_point *points)
+int	key(int button, t_fdf *data, t_point *p)
 {
-	int	i;
-	int	row;
-	int	column;
-
-	data->size = 20;
-	i = 0;
-	row = 0;
-	column = 0;
-	while (i < data->amount_points)
+	(void)data;
+	(void)p;
+	ft_putnbr(button);
+	if (button == 65362)
+		data->size = data->size + 5;
+	if (button == 65364)
+		data->size = data->size - 5;
+	if (button == 'b')
+		set_color(data, 'b');
+	if (button == 'm')
+		set_color(data, 'm');
+	if (button == 'n')
+		set_color(data, 'n');
+	if (button == 'v' || button == 53 || button == 113)
+		exit(1);
+	mlx_clear_window(data->mlx, data->win);
+	draw_map(data, p);
+	return (1);
+}
+void	set_color(t_fdf *data, char color)
+{
+	if (color == 'm')
 	{
-		while(column < data->c)
-		{
-			points[i].x = column * data->size;
-			points[i].y = row * data->size;
-			points[i].z = data->arr[i];
-			i++;
-			column++;
-		}
-		row++;
-		column = 0;
+		data->color_h = 0xFF2FAF;
+		data->color_l = 0xE12F2F;
+	}
+	if (color == 'b')
+	{
+		data->color_h = 0x222FAF;
+		data->color_l = 0xE12FAF;
+	}
+		if (color == 'n')
+	{
+		data->color_h = 0x222F5F;
+		data->color_l = 0xA42FAF;
 	}
 }
 
 int	main(int argc, char **argv)
 {
-	t_fdf	data;
+	t_fdf	*data;
 	t_point	p[50000];
 
 	(void)argc;
-	map_size(argv[1], &data.c, &data.r);
-	data.arr = (int *)malloc(sizeof(int) * (data.r * data.c) + 100);
-	ft_bzero(data.arr, (sizeof(int) * (data.r * data.c) + 100));
-	data.win_height = 1000;
-	data.win_width = 1000;
-	data.mlx = mlx_init();
-	data.win = mlx_new_window(data.mlx, data.win_height, data.win_width, "fdf");
-	fill_array(argv[1], data.arr);
-	data.amount_points = data.c * data.r;
-	set_points(&data, p);
-	draw_map(&data, p);
-	
-	mlx_key_hook(data.win, &key, &data);
-	mlx_loop(data.mlx);
+	data = (t_fdf *)malloc(sizeof(t_fdf));
+	set_color(data, 'm');
+	map_size(argv[1], &data->c, &data->r);
+	data->amount_points = data->c * data->r;
+	data->size = data->amount_points / 200;
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, 1000, 1000, "fdf");
+	read_file(argv[1], data);
+	//print_map(data.arr, data.r, data.c);
+	draw_map(data, p);
+	mlx_key_hook(data->win, &key, data);
+	mlx_loop(data->mlx);
 
-	free(data.arr);
+	free(data->arr);
+	system("leaks fdf");
 }

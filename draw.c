@@ -14,6 +14,7 @@
 
 int	draw_line(void *mlx, void *win, int beginX, int beginY, int endX, int endY, int color)
 {
+	//printf("begx: %d, begy: %d, endx: %d, endy: %d\n", beginX, beginY, endX, endY);
 	double deltaX = endX - beginX; //-1000
 	double deltaY = endY - beginY; //-600
 	int pixels = sqrt((deltaX * deltaX) + (deltaY * deltaY));
@@ -57,6 +58,32 @@ void	rotate_map(int count_points, t_point *p, int height_multiplier)
 	}
 }
 
+void	set_points(t_fdf *data, t_point *points)
+{
+	int	i;
+	int	row;
+	int	column;
+
+	i = 0;
+	row = 0;
+	column = 0;
+	while (i < data->amount_points)
+	{
+		while(column < data->c)
+		{
+			points[i].x = column * data->size;
+			points[i].y = row * data->size;
+			points[i].z = data->arr[i];
+			i++;
+			column++;
+		}
+		row++;
+		column = 0;
+	}
+}
+
+
+
 void	draw_map(t_fdf *data, t_point *p)
 {
 
@@ -68,16 +95,30 @@ void	draw_map(t_fdf *data, t_point *p)
 	i = 0;
 	col = 0;
 	row = 1;
+	set_points(data, p);
 	rotate_map(data->amount_points, p, data->height_multiplier);
 	while (row <= data->r)
 	{
 		while (col < data->c)
 		{
 			if (col != data->c - 1)
-				draw_line(data->mlx, data->win, p[i].x, p[i].y, p[i + 1].x, p[i + 1].y, 0xA42FAF);
+			{
+				if (p[i].z == 0)
+					draw_line(data->mlx, data->win, p[i].x, p[i].y, p[i + 1].x, p[i + 1].y, data->color_l);
+				if (p[i].z > 0)
+					draw_line(data->mlx, data->win, p[i].x, p[i].y, p[i + 1].x, p[i + 1].y, data->color_h);
+			}
 			if (row < data->r)
-				draw_line(data->mlx, data->win, \
-				p[i].x, p[i].y, p[row * data->c + col].x, p[row * data->c + col].y, 0x442FAF);
+			{
+				if (p[i].z == 0)
+					draw_line(data->mlx, data->win, \
+						p[i].x, p[i].y, p[row * data->c + col].x, p[row * data->c + col].y, data->color_l);
+				if (p[i].z > 0)
+					draw_line(data->mlx, data->win, \
+						p[i].x, p[i].y, p[row * data->c + col].x, p[row * data->c + col].y, data->color_h);
+			}
+				//draw_line(data->mlx, data->win, 
+				//p[i].x, p[i].y, p[row * data->c + col].x, p[row * data->c + col].y, 0x442FAF);
 			col++;
 			i++;
 		}

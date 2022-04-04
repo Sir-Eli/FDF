@@ -43,7 +43,7 @@ void	map_size(char *file, int *c, int *r)
 	close(fd);
 }
 
-void	fill_array(char *file, int *arr)
+void	read_file(char *file, t_fdf *data)
 {
 	int		fd;
 	char	*line;
@@ -52,6 +52,8 @@ void	fill_array(char *file, int *arr)
 	int		j;
 
 	fd = open(file, O_RDONLY);
+	data->arr = (int *)malloc(sizeof(int) * data->amount_points);
+	ft_bzero(data->arr, (sizeof(int) * data->amount_points));
 	i = 0;
 	j = 0;
 	while (get_next_line(fd, &line))
@@ -60,7 +62,7 @@ void	fill_array(char *file, int *arr)
 		free(line);
 		while (split[j])
 		{
-			arr[i] = ft_atoi(split[j]);
+			data->arr[i] = ft_atoi(split[j]);
 			i++;
 			j++;
 		}

@@ -31,10 +31,9 @@ typedef struct s_fdf
 	int		*arr;
 	void	*mlx;
 	void	*win;
-	int		color;
+	int		color_h;
+	int		color_l;
 	int		height_multiplier;
-	int		win_height;
-	int		win_width;
 	float	size;
 }		t_fdf;
 
@@ -48,7 +47,9 @@ typedef struct s_point
 int		get_next_line(const int fd, char **line);
 void	rows(char *file, int *r);
 void	map_size(char *file, int *c, int *r);
-void	fill_array(char *file, int *arr);
+void	read_file(char *file, t_fdf *data);
 void	draw_map(t_fdf *data, t_point *p);
+void	set_points(t_fdf *data, t_point *points);
+void	set_color(t_fdf *data, char color);
 
 #endif
