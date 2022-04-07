@@ -12,6 +12,23 @@
 
 #include "fdf.h"
 
+void	text(t_fdf *data)
+{
+	int	y;
+
+	y = 0;
+	mlx_string_put(data->mlx, data->win, 15,
+		y += 35, 0x44FFFF, "Use arrows to zoom and move left and right");
+	mlx_string_put(data->mlx, data->win, 15,
+		y += 30, 0x44FFFF, "Change projection using 'c' key");
+	mlx_string_put(data->mlx, data->win, 15,
+		y += 30, 0x44FFFF, "Change height using + and - keys");
+	mlx_string_put(data->mlx, data->win, 15,
+		y += 30, 0x44FFFF, "Adjust color using x and z keys");
+	mlx_string_put(data->mlx, data->win, 15,
+		y += 30, 0x44FFFF, "Adjust zoom using a and s keys");
+}
+
 void	map_size(char *file, int *c, int *r)
 {
 	int		fd;

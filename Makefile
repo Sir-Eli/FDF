@@ -4,7 +4,7 @@ INC = libft/libft.a
 
 
 all:
-	gcc main.c read_file.c draw.c gnl/get_next_line.c $(INC) $(FLAGS) \
+	gcc main.c read_file.c draw.c utils.c gnl/get_next_line.c $(INC) $(FLAGS) \
 	libmlx_Linux.a -lm -lX11 -lXext -g -o $(NAME)
 fclean:
 	rm -f $(NAME)

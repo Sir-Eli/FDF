@@ -42,12 +42,20 @@ int	key(int button, t_fdf *data, t_point *p)
 		data->size = data->size + 5;
 	if (button == 65364)
 		data->size = data->size - 5;
-	if (button == 'b')
-		set_color(data, 'b');
-	if (button == 'm')
-		set_color(data, 'm');
-	if (button == 'n')
-		set_color(data, 'n');
+	if (button == 'b'|| button == 'm' || button == 'n')
+		set_color(data, button);
+	if (button == 45)
+		data->height_multiplier -= 1;
+	if (button == 65506)
+		data->height_multiplier += 1;
+	if (button == 44)
+		data->rotate = 1;
+	if (button == 46)
+		data->rotate = 0;
+	if (button == 65361)
+		data->start_point -= 10;
+	if (button == 65363)
+		data->start_point += 10;
 	if (button == 'v' || button == 53 || button == 113)
 		exit(1);
 	mlx_clear_window(data->mlx, data->win);
@@ -88,7 +96,7 @@ int	main(int argc, char **argv)
 	data->win = mlx_new_window(data->mlx, 1000, 1000, "fdf");
 	read_file(argv[1], data);
 	//print_map(data.arr, data.r, data.c);
-	draw_map(data, p);
+	start(data, p);
 	mlx_key_hook(data->win, &key, data);
 	mlx_loop(data->mlx);
 

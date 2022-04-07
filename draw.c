@@ -32,57 +32,13 @@ int	draw_line(void *mlx, void *win, int beginX, int beginY, int endX, int endY, 
 	return (0);
 }
 
-void	rotate_point(float *a, float *b, float c)
+void	start(t_fdf *data, t_point *p)
 {
-	int	x;
-	int	y;
-
-	x = *a;
-	y = *b;
-	*a = (x - y) / sqrt(2);
-	*b = ((x + (2 * y)) - (c * 4)) / sqrt(6);
-
-	*a += 260;
-	*b += 260;
+	data->start_point = 560;
+	data->height_multiplier = 2;
+	data->rotate = 0;
+	draw_map(data, p);
 }
-
-void	rotate_map(int count_points, t_point *p, int height_multiplier)
-{
-	int i;
-
-	i = 0;
-	while (i < count_points)
-	{
-		rotate_point(&(p[i].x), &(p[i].y), (p[i].z * height_multiplier));
-		i++;
-	}
-}
-
-void	set_points(t_fdf *data, t_point *points)
-{
-	int	i;
-	int	row;
-	int	column;
-
-	i = 0;
-	row = 0;
-	column = 0;
-	while (i < data->amount_points)
-	{
-		while(column < data->c)
-		{
-			points[i].x = column * data->size;
-			points[i].y = row * data->size;
-			points[i].z = data->arr[i];
-			i++;
-			column++;
-		}
-		row++;
-		column = 0;
-	}
-}
-
-
 
 void	draw_map(t_fdf *data, t_point *p)
 {
@@ -91,12 +47,12 @@ void	draw_map(t_fdf *data, t_point *p)
 	int row;
 	int col;
 
-	data->height_multiplier = 2;
 	i = 0;
 	col = 0;
 	row = 1;
+	text(data);
 	set_points(data, p);
-	rotate_map(data->amount_points, p, data->height_multiplier);
+	rotate_map(data, data->amount_points, p, data->height_multiplier);
 	while (row <= data->r)
 	{
 		while (col < data->c)
