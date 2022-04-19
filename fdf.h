@@ -46,7 +46,7 @@ typedef struct s_point
 	float	z;
 }		t_point;
 
-void	start(t_fdf *data, t_point *p);
+void	start(t_fdf *data);
 int		get_next_line(const int fd, char **line);
 void	rows(char *file, int *r);
 void	map_size(char *file, int *c, int *r);

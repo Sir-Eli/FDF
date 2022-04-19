@@ -35,13 +35,11 @@ void	print_map(int *arr, int r, int c)
 
 int	key(int button, t_fdf *data, t_point *p)
 {
-	(void)data;
-	(void)p;
 	ft_putnbr(button);
 	if (button == 65362)
-		data->size = data->size + 5;
+		data->size = data->size + 0.2;
 	if (button == 65364)
-		data->size = data->size - 5;
+		data->size = data->size - 0.2;
 	if (button == 'b'|| button == 'm' || button == 'n')
 		set_color(data, button);
 	if (button == 45)
@@ -66,8 +64,8 @@ void	set_color(t_fdf *data, char color)
 {
 	if (color == 'm')
 	{
-		data->color_h = 0xFF2FAF;
-		data->color_l = 0xE12F2F;
+		data->color_h = 0x66233F;
+		data->color_l = 0x118FBF;
 	}
 	if (color == 'b')
 	{
@@ -81,22 +79,29 @@ void	set_color(t_fdf *data, char color)
 	}
 }
 
+void	error(char *str)
+{
+	ft_putstr(str);
+	exit(EXIT_FAILURE);
+}
+
 int	main(int argc, char **argv)
 {
 	t_fdf	*data;
 	t_point	p[50000];
 
-	(void)argc;
+	if (argc == 1)
+		error("File missing");
+	else if (argc > 2)
+		error("Too many files");
+	ft_bzero(p, 50000);
 	data = (t_fdf *)malloc(sizeof(t_fdf));
-	set_color(data, 'm');
+	ft_bzero(data, sizeof(t_fdf));
 	map_size(argv[1], &data->c, &data->r);
-	data->amount_points = data->c * data->r;
-	data->size = data->amount_points / 200;
-	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, 1000, 1000, "fdf");
+	start(data);
 	read_file(argv[1], data);
-	//print_map(data.arr, data.r, data.c);
-	start(data, p);
+	start(data);
+	draw_map(data, p);
 	mlx_key_hook(data->win, &key, data);
 	mlx_loop(data->mlx);
 

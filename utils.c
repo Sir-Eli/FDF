@@ -39,7 +39,7 @@ void	set_points(t_fdf *data, t_point *points)
 	i = 0;
 	row = 0;
 	column = 0;
-	while (i < data->amount_points)
+	while (row < data->r)
 	{
 		while(column < data->c)
 		{

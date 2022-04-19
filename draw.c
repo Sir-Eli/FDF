@@ -32,12 +32,16 @@ int	draw_line(void *mlx, void *win, int beginX, int beginY, int endX, int endY, 
 	return (0);
 }
 
-void	start(t_fdf *data, t_point *p)
+void	start(t_fdf *data)
 {
-	data->start_point = 560;
+	data->start_point = 360;
 	data->height_multiplier = 2;
-	data->rotate = 0;
-	draw_map(data, p);
+	data->rotate = 1;
+	set_color(data, 'm');
+	data->amount_points = data->c * data->r;
+	data->size = data->amount_points / 20;
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, 1000, 1000, "fdf");
 }
 
 void	draw_map(t_fdf *data, t_point *p)
