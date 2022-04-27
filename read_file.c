@@ -6,7 +6,7 @@
 /*   By: esirnio <esirnio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 16:34:55 by esirnio           #+#    #+#             */
-/*   Updated: 2022/03/17 14:27:30 by esirnio          ###   ########.fr       */
+/*   Updated: 2022/04/27 18:02:08 by esirnio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,16 @@ void	text(t_fdf *data)
 
 	place = 60;
 	mlx_string_put(data->mlx, data->win, 75, place, 0xA64FFF, "Here is how to use:");
+	place += 20;
+	mlx_string_put(data->mlx, data->win, 80, place, 0x7ca9f4, "Up and down arrows to move");
+	place += 20;
+	mlx_string_put(data->mlx, data->win, 80, place, 0x7ca9f4, "Right and left arrows to change projection");
+	place += 20;
+	mlx_string_put(data->mlx, data->win, 80, place, 0x7ca9f4, "z/x to zoom");
+	place += 20;
+	mlx_string_put(data->mlx, data->win, 80, place, 0x7ca9f4, "f/g/h change color");
+	place += 20;
+	mlx_string_put(data->mlx, data->win, 80, place, 0x7ca9f4, "+/- change height");
 }
 
 void	map_size(char *file, int *c, int *r)
@@ -75,7 +85,7 @@ void	read_file(char *file, t_fdf *data)
 			j++;
 		}
 		j = 0;
+ 		ft_free_array(split);
 	}
-	ft_free_array(split);
 	close(fd);
 }

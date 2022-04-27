@@ -6,7 +6,7 @@
 /*   By: esirnio <esirnio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 14:57:58 by esirnio           #+#    #+#             */
-/*   Updated: 2022/03/17 18:14:38 by esirnio          ###   ########.fr       */
+/*   Updated: 2022/04/27 16:12:27 by esirnio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@
 #include "mlx.h"
 #include <math.h>
 
+
+typedef struct s_point
+{
+	float	x;
+	float	y;
+	float	z;
+}		t_point;
+
 typedef struct s_fdf
 {
 	int		c;
@@ -36,22 +44,18 @@ typedef struct s_fdf
 	int		height_multiplier;
 	int		start_point;
 	int		rotate;
+	t_point	p[500000];
 	float	size;
 }		t_fdf;
 
-typedef struct s_point
-{
-	float	x;
-	float	y;
-	float	z;
-}		t_point;
-
+int	draw_line(void *mlx, void *win, int beginX, int beginY, int endX, int endY, int color);
+void	error(char *str);
 void	start(t_fdf *data);
 int		get_next_line(const int fd, char **line);
 void	rows(char *file, int *r);
 void	map_size(char *file, int *c, int *r);
 void	read_file(char *file, t_fdf *data);
-void	draw_map(t_fdf *data, t_point *p);
+int	draw_map(t_fdf *data, t_point *p);
 void	set_points(t_fdf *data, t_point *points);
 void	set_color(t_fdf *data, char color);
 void	text(t_fdf *data);
