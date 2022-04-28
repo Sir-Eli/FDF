@@ -32,16 +32,6 @@ int	draw_line(void *mlx, void *win, int beginX, int beginY, int endX, int endY, 
 	return (0);
 }
 
-void	start(t_fdf *data)
-{
-	data->start_point = 360;
-	data->height_multiplier = 2;
-	data->rotate = 1;
-	set_color(data, 3);
-	data->amount_points = data->c * data->r;
-	data->size = 30;
-}
-
 int	draw_map(t_fdf *data, t_point *p)
 {
 
@@ -52,8 +42,6 @@ int	draw_map(t_fdf *data, t_point *p)
 	i = 0;
 	col = 0;
 	row = 1;
-	text(data);
-	rotate_map(data, data->amount_points, p, data->height_multiplier);
 	while (row <= data->r)
 	{
 		while (col < data->c)

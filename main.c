@@ -12,35 +12,26 @@
 
 #include "fdf.h"
 
-int	key(int button, t_fdf *data)
+void	start_program(t_fdf *data, char *file)
 {
-	ft_putnbr(button);
-	if (button == 6)
-		data->size = data->size + 0.6;
-	if (button == 7)
-		data->size = data->size - 0.6;
-	if (button == 3|| button == 4 || button == 5)
-		set_color(data, button);
-	if (button == 27)
-		data->height_multiplier -= 1;
-	if (button == 24)
-		data->height_multiplier += 1;
-	if (button == 123)
-		data->rotate = 1;
-	if (button == 124)
-		data->rotate = 0;
-	if (button == 126)
-		data->start_point -= 10;
-	if (button == 125)
-		data->start_point += 10;
-	if (button == 53)
-		exit(1);
-	mlx_clear_window(data->mlx, data->win);
-	printf("hi");
+	data->mlx = mlx_init();
+	data->win = mlx_new_window(data->mlx, 1500, 1200, "fdf");
+	data->start_point = 360;
+	data->height_multiplier = 2;
+	data->rotate = 1;
+	data->color = 1;
+	data->color_h = 0x66233F;
+	data->color_l = 0x118FBF;
+	data->amount_points = data->c * data->r;
+	data->size = 30;
+	data->warning = 0;
+	text(data);
+	read_file(file, data);
 	set_points(data, data->p);
+	rotate_map(data, data->amount_points, data->p, data->height_multiplier);
 	draw_map(data, data->p);
-	return (0);
 }
+
 int	main(int argc, char **argv)
 {
 	t_fdf	*data;
@@ -49,13 +40,31 @@ int	main(int argc, char **argv)
 		error("Usage: ./fdf <filename>");
 	data = (t_fdf *)malloc(sizeof(t_fdf));
 	ft_bzero(data, sizeof(t_fdf));
-	data->mlx = mlx_init();
-	data->win = mlx_new_window(data->mlx, 1500, 1200, "fdf");
 	map_size(argv[1], &data->c, &data->r);
-	start(data);
-	read_file(argv[1], data);
-	set_points(data, data->p);
-	draw_map(data, data->p);
+	start_program(data, argv[1]);
 	mlx_key_hook(data->win, &key, data);
 	mlx_loop(data->mlx);
+}
+
+
+void	print_map(int *arr, int r, int c)
+{
+	int keep_track_cols = 0;
+	int keep_track_rows = 0;
+	int i = 0;
+
+	while (keep_track_rows < r)
+	{
+		printf("%3d", arr[i]);
+		keep_track_cols++;
+		if (keep_track_cols == c)
+		{
+			printf("\n");
+			keep_track_rows++;
+			keep_track_cols = 0;
+			if (keep_track_rows == r)
+				break ;
+		}
+		i++;
+	}
 }

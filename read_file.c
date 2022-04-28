@@ -17,17 +17,17 @@ void	text(t_fdf *data)
 	int	place;
 
 	place = 60;
-	mlx_string_put(data->mlx, data->win, 75, place, 0xA64FFF, "Here is how to use:");
+	mlx_string_put(data->mlx, data->win, 85, place, 0xA64FFF, "Here is how to use:");
 	place += 20;
-	mlx_string_put(data->mlx, data->win, 80, place, 0x7ca9f4, "Up and down arrows to move");
+	mlx_string_put(data->mlx, data->win, 95, place, 0x7ca9f4, "Up and down arrows to move");
 	place += 20;
-	mlx_string_put(data->mlx, data->win, 80, place, 0x7ca9f4, "Right and left arrows to change projection");
+	mlx_string_put(data->mlx, data->win, 95, place, 0x7ca9f4, "Right and left arrows to change projection");
 	place += 20;
-	mlx_string_put(data->mlx, data->win, 80, place, 0x7ca9f4, "z/x to zoom");
+	mlx_string_put(data->mlx, data->win, 95, place, 0x7ca9f4, "z/x to zoom");
 	place += 20;
-	mlx_string_put(data->mlx, data->win, 80, place, 0x7ca9f4, "f/g/h change color");
+	mlx_string_put(data->mlx, data->win, 95, place, 0x7ca9f4, "c to change color");
 	place += 20;
-	mlx_string_put(data->mlx, data->win, 80, place, 0x7ca9f4, "+/- change height");
+	mlx_string_put(data->mlx, data->win, 95, place, 0x7ca9f4, "+/- change height");
 }
 
 void	map_size(char *file, int *c, int *r)
