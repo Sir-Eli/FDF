@@ -12,40 +12,25 @@
 
 #include "fdf.h"
 
-void	new_drawing(t_fdf *data)
+void	set_color(t_fdf *data, int button)
 {
-	mlx_clear_window(data->mlx, data->win);
-	if (data->warning == 1)
-		mlx_string_put(data->mlx, data->win, 400, 250, 0xFF00AA, \
-			"------------Rotate first with arrow to left, then change height :)------------");
-	data->warning = 0;
-	text(data);
-	set_points(data, data->p);
-	rotate_map(data, data->amount_points, data->p, data->height_multiplier);
-	draw_map(data, data->p);
-}
-
-void	set_color(t_fdf *data)
-{
-	data->color++;
-	if (data->color == 4)
-		data->color = 1;
 	if (data->color == 1)
 	{
-		data->color_h = 0x66233F;
-		data->color_l = 0x118FBF;
+		data->color_h = data->color_h * 3;
+		data->color_l = data->color_l * 3;
 	}
 	if (data->color == 2)
 	{
-		data->color_h = 0xa22FAF;
-		data->color_l = 0x11F2FA;
+		data->color_h = data->color_h / 2;
+		data->color_l = data->color_l / 2;
 	}
-	if (data->color == 3)
+	if (++data->color == 3)
+		data->color = 1;
+	if (button == 111)
 	{
-		data->color_h = 0x062F5F;
-		data->color_l = 0x742FAF;
+		data->color_h = 0xff00aa;
+		data->color_l = 0x0859c6;
 	}
-	new_drawing(data);
 }
 
 void	change_map_size(int button, t_fdf *data)
@@ -54,37 +39,45 @@ void	change_map_size(int button, t_fdf *data)
 		data->size = data->size + 0.6;
 	if (button == 7 || button == 120)
 		data->size = data->size - 0.6;
-	new_drawing(data);
 }
 
-void change_height(int button, t_fdf *data)
+void	change_height(int button, t_fdf *data)
 {
 	if (data->rotate == 1)
 	{
 		if (button == 27 || button == 45)
-			data->height_multiplier -= 1;
+			data->height -= 1;
 		if (button == 24 || button == 43)
-			data->height_multiplier += 1;
+			data->height += 1;
 	}
 	else
-		data->warning = 1;
-	new_drawing(data);
+		data->tip_to_user = 1;
 }
 
-void	map_rotate(int button, t_fdf *data)
+void	map_rotate(t_fdf *data)
 {
-	if (button == 123 || button == 65361)
-		data->rotate = 1;
-	if (button == 124 || button == 65363)
+	if (data->rotate == 1)
+	{
 		data->rotate = 0;
-	new_drawing(data);
+		data->where_x -= 200;
+		data->where_y += 80;
+	}
+	else
+	{
+		data->rotate = 1;
+		data->where_x += 200;
+		data->where_y -= 80;
+	}
 }
 
 void	change_position(int button, t_fdf *data)
 {
 	if (button == 126 || button == 65362)
-		data->start_point -= 10;
+		data->where_y -= 10;
 	if (button == 125 || button == 65364)
-		data->start_point += 10;
-	new_drawing(data);
+		data->where_y += 10;
+	if (button == 123 || button == 65361)
+		data->where_x -= 10;
+	if (button == 124 || button == 65363)
+		data->where_x += 10;
 }

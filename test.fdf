@@ -1,0 +1,5 @@
+0  11 .. 0 0 -115  1  0
+10  11 .. 0 0 -115  1  0
+
+abort tulee kun kolme väli, mites jos yks väli? 
+jos -115 -> 0 ei piirrä viivoja välille

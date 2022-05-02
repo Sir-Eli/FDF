@@ -12,24 +12,6 @@
 
 #include "fdf.h"
 
-void	text(t_fdf *data)
-{
-	int	place;
-
-	place = 60;
-	mlx_string_put(data->mlx, data->win, 85, place, 0xA64FFF, "Here is how to use:");
-	place += 20;
-	mlx_string_put(data->mlx, data->win, 95, place, 0x7ca9f4, "Up and down arrows to move");
-	place += 20;
-	mlx_string_put(data->mlx, data->win, 95, place, 0x7ca9f4, "Right and left arrows to change projection");
-	place += 20;
-	mlx_string_put(data->mlx, data->win, 95, place, 0x7ca9f4, "z/x to zoom");
-	place += 20;
-	mlx_string_put(data->mlx, data->win, 95, place, 0x7ca9f4, "c to change color");
-	place += 20;
-	mlx_string_put(data->mlx, data->win, 95, place, 0x7ca9f4, "+/- change height");
-}
-
 void	map_size(char *file, int *c, int *r)
 {
 	int		fd;
@@ -37,6 +19,8 @@ void	map_size(char *file, int *c, int *r)
 	int		i;
 
 	fd = open(file, O_RDONLY);
+	if (fd < 0)
+		error("-- open failed, try another file --\n");
 	*c = 0;
 	*r = 0;
 	i = 0;
