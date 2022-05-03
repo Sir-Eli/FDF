@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esirnio <esirnio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:10:30 by esirnio           #+#    #+#             */
-/*   Updated: 2022/04/27 18:03:03 by esirnio          ###   ########.fr       */
+/*   Updated: 2022/05/03 15:21:52 by esirnio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void	text(t_fdf *data)
 
 	if (data->tip_to_user == 1)
 		mlx_string_put(data->mlx, data->win, 550, 150, 0xFF00AA, \
-			"-- Rotate first with arrow to left, then change height --");
+			"-- Rotate first with P, then change height --");
 	data->tip_to_user = 0;
 	place = 60;
 	mlx_string_put(data->mlx, data->win, 85, place, 0xA64FFF, \
@@ -54,7 +54,7 @@ void	rotate_point(t_fdf *data, float *a, float *b, float c)
 	}
 	if (data->rotate == 2)
 	{
-		*a = (x - y + 300) / sqrt(2);
+		*a = (x - y + 500) / sqrt(2);
 		*b = ((x + (2.3 * y)) - (c * 4)) / sqrt(20);
 	}
 	*a += data->start_point + data->where_x;
@@ -103,14 +103,14 @@ int	key(int button, t_fdf *data)
 	ft_putnbr(button);
 	if (button == 6 || button == 122 || button == 7 || button == 120)
 		change_map_size(button, data);
-	if (button == 99 || button == 111)
+	if (button == 99 || button == 111 || button == 8 || button == 31)
 		set_color(data, button);
 	if (button == 27 || button == 45 || button == 24 || button == 43)
 		change_height(button, data);
-	if (button == 112)
+	if (button == 112 || button == 35)
 		map_rotate(data);
-	if (button == 65363 || button == 65362 || \
-			button == 65361 || button == 65364)
+	if (button == 65363 || button == 65362 || button == 65361 || button == 65364 \
+		|| button == 123 || button == 124 || button == 125 || button == 126)
 		change_position(button, data);
 	if (button == 65307 || button == 53)
 		exit(1);

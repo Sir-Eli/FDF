@@ -6,7 +6,7 @@
 /*   By: esirnio <esirnio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:10:30 by esirnio           #+#    #+#             */
-/*   Updated: 2022/03/17 18:18:42 by esirnio          ###   ########.fr       */
+/*   Updated: 2022/05/03 14:49:03 by esirnio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,6 @@ void	draw_row(t_fdf *data, int current)
 	start_xy[1] = data->p[current].y;
 	end_xy[0] = data->p[current + 1].x;
 	end_xy[1] = data->p[current + 1].y;
-		/*if (data->rotate == 2)
-		{
-			//start_xy[0] = start_xy[0] + 10;
-			//start_xy[1] = start_xy[1] - 10;
-			end_xy[0] = end_xy[0] + 10;
-			end_xy[1] = end_xy[1] - 10;
-		}*/
 	if (data->p[current].z == 0)
 		draw_line(data, start_xy, end_xy, data->color_l);
 	if (data->p[current].z > 0 || data->p[current + 1].z != 0)
@@ -67,13 +60,6 @@ void	draw_col(t_fdf *data, int current, int row, int col)
 	start_xy[1] = data->p[current].y;
 	end_xy[0] = data->p[row * data->c + col].x;
 	end_xy[1] = data->p[row * data->c + col].y;
-	/*if (data->rotate == 2)
-		{
-			//start_xy[0] = start_xy[0] + 10;
-			//start_xy[1] = start_xy[1] - 10;
-			end_xy[0] = end_xy[0] + 10;
-			end_xy[1] = end_xy[1] - 10;
-		}*/
 	if (data->p[current].z == 0)
 		draw_line(data, start_xy, end_xy, data->color_l);
 	if (data->p[current].z != 0 || data->p[current + data->c].z != 0)

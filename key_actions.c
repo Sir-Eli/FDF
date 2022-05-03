@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   key_actions.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: esirnio <esirnio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:10:30 by esirnio           #+#    #+#             */
-/*   Updated: 2022/04/27 18:03:03 by esirnio          ###   ########.fr       */
+/*   Updated: 2022/05/03 14:19:47 by esirnio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void	set_color(t_fdf *data, int button)
 	}
 	if (++data->color == 3)
 		data->color = 1;
-	if (button == 111)
+	if (button == 111 || button == 31)
 	{
 		data->color_h = 0xff00aa;
 		data->color_l = 0x0859c6;
@@ -59,20 +59,16 @@ void	map_rotate(t_fdf *data)
 	if (data->rotate == 1)
 	{
 		data->rotate = 2;
-		//data->where_x -= 200;
-		//data->where_y += 80;
+		data->where_x -= 200;
+		data->where_y += 80;
 	}
 	else if (data->rotate == 2)
-	{
 		data->rotate = 0;
-		//data->where_x -= 200;
-		//data->where_y += 80;
-	}
 	else
 	{
 		data->rotate = 1;
-		//data->where_x += 200;
-		//data->where_y -= 80;
+		data->where_x += 200;
+		data->where_y -= 80;
 	}
 }
 
