@@ -43,7 +43,7 @@ void	change_map_size(int button, t_fdf *data)
 
 void	change_height(int button, t_fdf *data)
 {
-	if (data->rotate == 1)
+	if (data->rotate == 1 || data->rotate == 2)
 	{
 		if (button == 27 || button == 45)
 			data->height -= 1;
@@ -58,15 +58,21 @@ void	map_rotate(t_fdf *data)
 {
 	if (data->rotate == 1)
 	{
+		data->rotate = 2;
+		//data->where_x -= 200;
+		//data->where_y += 80;
+	}
+	else if (data->rotate == 2)
+	{
 		data->rotate = 0;
-		data->where_x -= 200;
-		data->where_y += 80;
+		//data->where_x -= 200;
+		//data->where_y += 80;
 	}
 	else
 	{
 		data->rotate = 1;
-		data->where_x += 200;
-		data->where_y -= 80;
+		//data->where_x += 200;
+		//data->where_y -= 80;
 	}
 }
 

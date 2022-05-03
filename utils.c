@@ -41,19 +41,26 @@ void	text(t_fdf *data)
 
 void	rotate_point(t_fdf *data, float *a, float *b, float c)
 {
-	int	x;
-	int	y;
+	float	x;
+	float	y;
 
+
+	x = *a;
+	y = *b;
 	if (data->rotate == 1)
 	{
-		x = *a;
-		y = *b;
 		*a = (x - y) / sqrt(2);
 		*b = ((x + (2 * y)) - (c * 4)) / sqrt(6);
+	}
+	if (data->rotate == 2)
+	{
+		*a = (x - y + 300) / sqrt(2);
+		*b = ((x + (2.3 * y)) - (c * 4)) / sqrt(20);
 	}
 	*a += data->start_point + data->where_x;
 	*b += data->start_point + data->where_y;
 }
+
 
 void	rotate_map(t_fdf *data, int count_points, t_point *p, int height)
 {
@@ -113,6 +120,6 @@ int	key(int button, t_fdf *data)
 
 void	error(char *str)
 {
-	ft_putstr(str);
+	ft_putendl(str);
 	exit(EXIT_FAILURE);
 }
