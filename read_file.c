@@ -6,30 +6,30 @@
 /*   By: esirnio <esirnio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/27 16:34:55 by esirnio           #+#    #+#             */
-/*   Updated: 2022/05/03 16:49:17 by esirnio          ###   ########.fr       */
+/*   Updated: 2022/05/04 16:30:49 by esirnio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "fdf.h"
 
-int count_cols(char *line)
+int	count_cols(char *line)
 {
-	int i;
-	int length;
+	int	i;
+	int	length;
 
 	length = 0;
 	i = 0;
-		while (line[i])
+	while (line[i])
+	{
+		if (line[i] == ' ' || (i != 0 && line [i - 1] != ' '))
 		{
-			if (line[i] == ' ' || (i != 0 && line [i - 1] != ' '))
-			{
-				i++;
-				continue ;
-			}
 			i++;
-			length++;
+			continue ;
 		}
-	return(length);
+		i++;
+		length++;
+	}
+	return (length);
 }
 
 void	map_size(char *file, int *c, int *r)
@@ -60,7 +60,7 @@ void	map_size(char *file, int *c, int *r)
 
 void	is_value_valid(int value, char *string)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (string[i] == '-')
@@ -71,7 +71,7 @@ void	is_value_valid(int value, char *string)
 			error("No good character");
 		i++;
 	}
-	if (value < - 11000 || value > 9000 )
+	if (value < -11000 || value > 9000)
 		error("Number too big or small");
 }
 
@@ -84,6 +84,8 @@ void	read_file(char *file, t_fdf *data)
 	int		j;
 
 	fd = open(file, O_RDONLY);
+	//if fd something
+		//error
 	data->arr = (int *)malloc(sizeof(int) * data->amount_points);
 	ft_bzero(data->arr, (sizeof(int) * data->amount_points));
 	i = 0;
@@ -92,16 +94,15 @@ void	read_file(char *file, t_fdf *data)
 	{
 		split = ft_strsplit(line, ' ');
 		free(line);
-		while (split[j])
+		while (j < data->c)
 		{
 			data->arr[i] = ft_atoi(split[j]);
-			//printf("after atoi 99-8 : %d \n", data->arr[i]);
 			is_value_valid(data->arr[i], split[j]);
 			i++;
 			j++;
 		}
 		j = 0;
- 		ft_free_array(split);
+		ft_free_array(split);
 	}
 	close(fd);
 }

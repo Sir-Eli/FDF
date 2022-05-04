@@ -6,7 +6,7 @@
 /*   By: esirnio <esirnio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:10:30 by esirnio           #+#    #+#             */
-/*   Updated: 2022/05/03 15:21:52 by esirnio          ###   ########.fr       */
+/*   Updated: 2022/05/04 16:26:18 by esirnio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,6 @@ void	rotate_point(t_fdf *data, float *a, float *b, float c)
 	float	x;
 	float	y;
 
-
 	x = *a;
 	y = *b;
 	if (data->rotate == 1)
@@ -60,7 +59,6 @@ void	rotate_point(t_fdf *data, float *a, float *b, float c)
 	*a += data->start_point + data->where_x;
 	*b += data->start_point + data->where_y;
 }
-
 
 void	rotate_map(t_fdf *data, int count_points, t_point *p, int height)
 {
@@ -109,8 +107,9 @@ int	key(int button, t_fdf *data)
 		change_height(button, data);
 	if (button == 112 || button == 35)
 		map_rotate(data);
-	if (button == 65363 || button == 65362 || button == 65361 || button == 65364 \
-		|| button == 123 || button == 124 || button == 125 || button == 126)
+	if (button == 65363 || button == 65362 || button == 65361 \
+		|| button == 65364 || button == 123 || button == 124 \
+			|| button == 125 || button == 126)
 		change_position(button, data);
 	if (button == 65307 || button == 53)
 		exit(1);

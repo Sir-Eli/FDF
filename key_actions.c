@@ -6,7 +6,7 @@
 /*   By: esirnio <esirnio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:10:30 by esirnio           #+#    #+#             */
-/*   Updated: 2022/05/03 14:19:47 by esirnio          ###   ########.fr       */
+/*   Updated: 2022/05/04 16:20:56 by esirnio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,9 @@ void	change_height(int button, t_fdf *data)
 	if (data->rotate == 1 || data->rotate == 2)
 	{
 		if (button == 27 || button == 45)
-			data->height -= 1;
+			data->height -= 0.6;
 		if (button == 24 || button == 43)
-			data->height += 1;
+			data->height += 0.6;
 	}
 	else
 		data->tip_to_user = 1;

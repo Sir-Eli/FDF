@@ -6,7 +6,7 @@
 /*   By: esirnio <esirnio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:10:30 by esirnio           #+#    #+#             */
-/*   Updated: 2022/05/03 14:49:03 by esirnio          ###   ########.fr       */
+/*   Updated: 2022/05/04 16:27:35 by esirnio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,15 @@ void	draw_row(t_fdf *data, int current)
 
 	start_xy[0] = data->p[current].x;
 	start_xy[1] = data->p[current].y;
-	end_xy[0] = data->p[current + 1].x;
-	end_xy[1] = data->p[current + 1].y;
-	if (data->p[current].z == 0)
-		draw_line(data, start_xy, end_xy, data->color_l);
-	if (data->p[current].z > 0 || data->p[current + 1].z != 0)
-		draw_line(data, start_xy, end_xy, data->color_h);
+	if (data->c > 1)
+	{
+		end_xy[0] = data->p[current + 1].x;
+		end_xy[1] = data->p[current + 1].y;
+		if (data->p[current].z == 0)
+			draw_line(data, start_xy, end_xy, data->color_l);
+		if (data->p[current].z > 0 || data->p[current + 1].z != 0)
+			draw_line(data, start_xy, end_xy, data->color_h);
+	}
 }
 
 void	draw_col(t_fdf *data, int current, int row, int col)

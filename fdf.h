@@ -6,7 +6,7 @@
 /*   By: esirnio <esirnio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 14:57:58 by esirnio           #+#    #+#             */
-/*   Updated: 2022/04/27 16:12:27 by esirnio          ###   ########.fr       */
+/*   Updated: 2022/05/04 16:17:11 by esirnio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ typedef struct s_fdf
 	int		color;
 	int		color_h;
 	int		color_l;
-	int		height;
+	float		height;
 	int		start_point;
 	int		rotate;
 	int		tip_to_user;

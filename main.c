@@ -6,7 +6,7 @@
 /*   By: esirnio <esirnio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:10:30 by esirnio           #+#    #+#             */
-/*   Updated: 2022/05/03 14:39:29 by esirnio          ###   ########.fr       */
+/*   Updated: 2022/05/04 16:27:04 by esirnio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void	start_program(t_fdf *data, char *file)
 	data->mlx = mlx_init();
 	data->win = mlx_new_window(data->mlx, 1500, 1200, "fdf");
 	data->start_point = 360;
-	data->height = 2;
+	data->height = 1.2;
 	data->rotate = 0;
 	set_color(data, 111);
 	data->amount_points = data->c * data->r;
@@ -43,7 +43,7 @@ int	main(int argc, char **argv)
 	map_size(argv[1], &data->c, &data->r);
 	start_program(data, argv[1]);
 	mlx_hook(data->win, 2, 1L << 0, key, data);
-	//mlx_key_hook(data->win, &key, data);
+	/*mlx_key_hook(data->win, &key, data);*/
 	mlx_loop(data->mlx);
 }
 
@@ -68,7 +68,7 @@ int	main(int argc, char **argv)
 
 }*/
 
-void	print_map(int *arr, int r, int c)
+/*void	print_map(int *arr, int r, int c)
 {
 	int	keep_track_cols = 0;
 	int	keep_track_rows = 0;
@@ -87,5 +87,4 @@ void	print_map(int *arr, int r, int c)
 				break ;
 		}
 		i++;
-	}
-}
+	}*/
