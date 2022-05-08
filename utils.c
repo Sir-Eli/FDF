@@ -98,7 +98,6 @@ void	set_points(t_fdf *data, t_point *points)
 
 int	key(int button, t_fdf *data)
 {
-	ft_putnbr(button);
 	if (button == 6 || button == 122 || button == 7 || button == 120)
 		change_map_size(button, data);
 	if (button == 99 || button == 111 || button == 8 || button == 31)
@@ -115,10 +114,4 @@ int	key(int button, t_fdf *data)
 		exit(1);
 	new_drawing(data);
 	return (0);
-}
-
-void	error(char *str)
-{
-	ft_putendl(str);
-	exit(EXIT_FAILURE);
 }

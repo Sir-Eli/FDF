@@ -1,18 +1,27 @@
 NAME = fdf
-FLAGS = -Wall -Wextra
-INC = libft/libft.a 
 
+FLAGS = -Wall -Wextra -Werror
 
-all:
-	gcc main.c read_file.c draw.c utils.c key_actions.c gnl/get_next_line.c $(INC) $(FLAGS) \
-	-I /usr/local/include -L /usr/local/lib -l mlx -framework OpenGl -framework AppKit -g -o \
-	$(NAME) -fsanitize=address
-fclean:
+INC = -I libft/includes -L libft -lft
+
+SRCS = main.c key_actions.c read_file.c draw.c utils.c
+
+FRAME = libmlx_Linux.a -lm -lX11 -lXext 
+
+EXTRA = -g -fsanitize=address
+
+all: $(NAME)
+
+$(NAME):
+	make -C libft/
+	gcc -o $(NAME) $(SRCS) $(INC) $(FLAGS) $(FRAME)
+clean:
+	make clean -C libft/
+	rm -f *.o
+fclean: clean
+	make fclean -C libft/
 	rm -f $(NAME)
-exec:
-	./fdf ./test_maps/42.fdf
-re:
-	fclean all
+re: fclean all
 	
 .PHONY: all clean fclean re
 
@@ -21,4 +30,4 @@ re:
 	-I /usr/local/include -L /usr/local/lib -l mlx -framework OpenGl -framework AppKit -g -o \
 	$(NAME) -fsanitize=address
 #gcc main.c read_file.c draw.c utils.c gnl/get_next_line.c $(INC) $(FLAGS) \
-	libmlx_Linux.a -lm -lX11 -lXext -g -o $(NAME)
+	libmlx_Linux.a -lm -lX11 -lXext -g -o $(NAME)#-fsanitize=address

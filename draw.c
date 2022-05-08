@@ -36,46 +36,51 @@ void	draw_line(t_fdf *data, int start_xy[2], int end_xy[2], int color)
 	}
 }
 
-void	draw_row(t_fdf *data, int current)
+void	draw_row(t_fdf *data, int cur)
 {
 	int	end_xy[2];
 	int	start_xy[2];
 
-	start_xy[0] = data->p[current].x;
-	start_xy[1] = data->p[current].y;
-	if (data->c > 1)
-	{
-		end_xy[0] = data->p[current + 1].x;
-		end_xy[1] = data->p[current + 1].y;
-		if (data->p[current].z == 0)
-			draw_line(data, start_xy, end_xy, data->color_l);
-		if (data->p[current].z > 0 || data->p[current + 1].z != 0)
-			draw_line(data, start_xy, end_xy, data->color_h);
-	}
+	start_xy[0] = data->p[cur].x;
+	start_xy[1] = data->p[cur].y;
+	end_xy[0] = data->p[cur + 1].x;
+	end_xy[1] = data->p[cur + 1].y;
+	if (data->p[cur].z != 0)
+		draw_line(data, start_xy, end_xy, \
+			data->color_h + (data->p[cur].z * 3400));
+	else if (data->p[cur + 1].z != 0)
+		draw_line(data, start_xy, end_xy, \
+			data->color_h + (data->p[cur + 1].z * 3400));
+	else
+		draw_line(data, start_xy, end_xy, data->color_l);
 }
 
-void	draw_col(t_fdf *data, int current, int row, int col)
+void	draw_col(t_fdf *data, int cur, int row, int col)
 {
 	int	end_xy[2];
 	int	start_xy[2];
 
-	start_xy[0] = data->p[current].x;
-	start_xy[1] = data->p[current].y;
+	start_xy[0] = data->p[cur].x;
+	start_xy[1] = data->p[cur].y;
 	end_xy[0] = data->p[row * data->c + col].x;
 	end_xy[1] = data->p[row * data->c + col].y;
-	if (data->p[current].z == 0)
+	if (data->p[cur].z != 0)
+		draw_line(data, start_xy, end_xy, \
+			data->color_h + (data->p[cur].z * 3400));
+	else if (data->p[cur + data->c].z != 0)
+		draw_line(data, start_xy, end_xy, \
+			data->color_h + (data->p[cur + data->c].z * 3400));
+	else
 		draw_line(data, start_xy, end_xy, data->color_l);
-	if (data->p[current].z != 0 || data->p[current + data->c].z != 0)
-		draw_line(data, start_xy, end_xy, data->color_h);
 }
 
 void	draw_map(t_fdf *data)
 {
-	int	current_point;
+	int	cur_point;
 	int	row;
 	int	col;
 
-	current_point = 0;
+	cur_point = 0;
 	col = 0;
 	row = 1;
 	while (row <= data->r)
@@ -83,11 +88,11 @@ void	draw_map(t_fdf *data)
 		while (col < data->c)
 		{
 			if (col != data->c - 1)
-				draw_row(data, current_point);
+				draw_row(data, cur_point);
 			if (row < data->r)
-				draw_col(data, current_point, row, col);
+				draw_col(data, cur_point, row, col);
 			col++;
-			current_point++;
+			cur_point++;
 		}
 		row++;
 		col = 0;

@@ -1,1 +1,4 @@
 viel yks projektion
+
+Werror??
+MAkefile relink and make libft also

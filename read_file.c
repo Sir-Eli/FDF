@@ -67,7 +67,7 @@ void	is_value_valid(int value, char *string)
 		i++;
 	while (string[i] != '\0')
 	{
-		if (!(ft_isdigit(string[i]))) //// linet eri mittasia??
+		if (!(ft_isdigit(string[i])))
 			error("No good character");
 		i++;
 	}
@@ -84,14 +84,12 @@ void	read_file(char *file, t_fdf *data)
 	int		j;
 
 	fd = open(file, O_RDONLY);
-	//if fd something
-		//error
-	data->arr = (int *)malloc(sizeof(int) * data->amount_points);
-	ft_bzero(data->arr, (sizeof(int) * data->amount_points));
+	if (fd < 0)
+		error("open failed");
 	i = 0;
-	j = 0;
 	while (get_next_line(fd, &line))
 	{
+		j = 0;
 		split = ft_strsplit(line, ' ');
 		free(line);
 		while (j < data->c)
@@ -101,7 +99,6 @@ void	read_file(char *file, t_fdf *data)
 			i++;
 			j++;
 		}
-		j = 0;
 		ft_free_array(split);
 	}
 	close(fd);

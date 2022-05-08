@@ -13,16 +13,13 @@
 #ifndef FDF_H
 # define FDF_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include "gnl/get_next_line.h"
-#include "libft/libft.h"
-#include "mlx.h"
-#include <math.h>
-
+# include <stdlib.h>
+# include <stdio.h>
+# include <sys/types.h>
+# include <sys/stat.h>
+# include <fcntl.h>
+# include "mlx.h"
+# include <math.h>
 
 typedef struct s_point
 {
@@ -42,7 +39,7 @@ typedef struct s_fdf
 	int		color;
 	int		color_h;
 	int		color_l;
-	float		height;
+	float	height;
 	int		start_point;
 	int		rotate;
 	int		tip_to_user;
