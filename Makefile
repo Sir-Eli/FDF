@@ -2,13 +2,13 @@ NAME = fdf
 
 FLAGS = -Wall -Wextra -Werror
 
-INC = -I libft/includes -L libft -lft
+INC = -I./libft/includes -I /usr/local/include -L libft -lft
 
 SRCS = main.c key_actions.c read_file.c draw.c utils.c
 
-FRAME = libmlx_Linux.a -lm -lX11 -lXext 
+OBJS= $(SRCS:%.c=%.o)
 
-EXTRA = -g -fsanitize=address
+FRAME = -L /usr/local/lib -l mlx -framework OpenGl -framework AppKit
 
 all: $(NAME)
 
@@ -17,14 +17,15 @@ $(NAME):
 	gcc -o $(NAME) $(SRCS) $(INC) $(FLAGS) $(FRAME)
 clean:
 	make clean -C libft/
-	rm -f *.o
+	rm -f $(OBJS)
 fclean: clean
 	make fclean -C libft/
 	rm -f $(NAME)
-re: fclean all
+leaks:
+	leaks --atExit -- ./fdf test_maps/42.fdf
+re: clean fclean all
 	
 .PHONY: all clean fclean re
-
 
 #gcc main.c read_file.c draw.c utils.c gnl/get_next_line.c $(INC) $(FLAGS) \
 	-I /usr/local/include -L /usr/local/lib -l mlx -framework OpenGl -framework AppKit -g -o \

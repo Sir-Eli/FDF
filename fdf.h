@@ -6,19 +6,16 @@
 /*   By: esirnio <esirnio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 14:57:58 by esirnio           #+#    #+#             */
-/*   Updated: 2022/05/04 16:17:11 by esirnio          ###   ########.fr       */
+/*   Updated: 2022/05/09 13:32:19 by esirnio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FDF_H
 # define FDF_H
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <sys/types.h>
-# include <sys/stat.h>
 # include <fcntl.h>
 # include "mlx.h"
+# include "libft.h"
 # include <math.h>
 
 typedef struct s_point

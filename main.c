@@ -6,7 +6,7 @@
 /*   By: esirnio <esirnio@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/14 15:10:30 by esirnio           #+#    #+#             */
-/*   Updated: 2022/05/04 16:27:04 by esirnio          ###   ########.fr       */
+/*   Updated: 2022/05/13 13:56:24 by esirnio          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void	start_program(t_fdf *data, char *file)
 	data->where_x = 0;
 	data->where_y = 0;
 	data->arr = (int *)malloc(sizeof(int) * data->amount_points);
-	printf("points: %d\n\n", data->amount_points);
 	if (!data->arr)
 		error("malloc failed");
 	ft_bzero(data->arr, (sizeof(int) * data->amount_points));
@@ -58,46 +57,3 @@ int	main(int argc, char **argv)
 	mlx_hook(data->win, 2, 1L << 0, key, data);
 	mlx_loop(data->mlx);
 }
-
-/*int main(int argc, char **argv)
-{
-	mlx_key_hook(data->win, &key, data);
-	char line[25] = "10  11  0  11  5  0";
-	char **splitted;
-	int c;
-	int r;
-	int i;
-
-	map_size(argv[1], &c, &r);
-	printf("c: %d and c: %d", c, r);
-	i = 0;
-	splitted = ft_strsplit(line, '.');
-	while (splitted[i] != NULL)
-	{
-		ft_putstr(splitted[i]);
-		ft_putchar('\n');
-		i++;
-	}
-
-}*/
-
-/*void	print_map(int *arr, int r, int c)
-{
-	int	keep_track_cols = 0;
-	int	keep_track_rows = 0;
-	int	i = 0;
-
-	while (keep_track_rows < r)
-	{
-		printf("%3d", arr[i]);
-		keep_track_cols++;
-		if (keep_track_cols == c)
-		{
-			printf("\n");
-			keep_track_rows++;
-			keep_track_cols = 0;
-			if (keep_track_rows == r)
-				break ;
-		}
-		i++;
-	}*/
