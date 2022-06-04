@@ -9,12 +9,13 @@ SRCS = main.c key_actions.c read_file.c draw.c utils.c
 OBJS= $(SRCS:%.c=%.o)
 
 FRAME = -L /usr/local/lib -l mlx -framework OpenGl -framework AppKit
+FRAME_LINUX = libmlx_Linux.a -lm -lX11 -lXext
 
 all: $(NAME)
 
 $(NAME):
 	make -C libft/
-	gcc -o $(NAME) $(SRCS) $(INC) $(FLAGS) $(FRAME)
+	gcc -o $(NAME) $(SRCS) $(INC) $(FLAGS) $(FRAME_LINUX)
 clean:
 	make clean -C libft/
 	rm -f $(OBJS)
@@ -26,6 +27,11 @@ leaks:
 re: clean fclean all
 	
 .PHONY: all clean fclean re
+
+# compile with linux \
+	$(NAME):	\
+		make -C libft/ \
+		gcc -o $(NAME) $(SRCS) $(INC) $(FLAGS) $(FRAME_LINUX)
 
 #gcc main.c read_file.c draw.c utils.c gnl/get_next_line.c $(INC) $(FLAGS) \
 	-I /usr/local/include -L /usr/local/lib -l mlx -framework OpenGl -framework AppKit -g -o \
